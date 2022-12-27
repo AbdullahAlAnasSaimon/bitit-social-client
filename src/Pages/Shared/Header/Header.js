@@ -10,9 +10,9 @@ const Header = () => {
       <div className="navbar bg-base-100 p-0 min-h-[50px] w-full md:w-11/12 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
-            <label tabIndex={0} className="btn btn-ghost btn-circle lg:hidden">
+            <button tabIndex={0} className="btn btn-ghost btn-circle lg:hidden">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
-            </label>
+            </button>
             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
               <li><NavLink to='/' className='h-[35px] rounded-full mx-1'><AiFillHome />Home</NavLink></li>
               <li><NavLink to='/media' className='h-[35px] rounded-full mx-1'><AiFillPicture />Media</NavLink></li>
@@ -30,11 +30,11 @@ const Header = () => {
         </div>
         <div className="navbar-end">
           <div className="dropdown dropdown-end">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+            <button tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">
                 <img src="https://placeimg.com/80/80/people" alt='' />
               </div>
-            </label>
+            </button>
             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
               <li><NavLink to=''>About</NavLink></li>
               <li><a>Logout</a></li>
