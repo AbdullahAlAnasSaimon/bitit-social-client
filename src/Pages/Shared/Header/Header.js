@@ -1,6 +1,7 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { AiFillHome, AiFillMessage, AiFillPicture } from 'react-icons/ai';
+import './Header.css';
 
 
 const Header = () => {
@@ -18,13 +19,13 @@ const Header = () => {
             <li><NavLink className='h-[35px] rounded-full mx-1'><AiFillMessage />Message</NavLink></li>
             </ul>
           </div>
-          <NavLink className="btn btn-ghost normal-case text-xl">Bitit</NavLink>
+          <Link className="btn btn-ghost normal-case text-xl">Bitit</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 rounded-none">
-            <li><NavLink className='h-[35px] rounded-full mx-1'><AiFillHome />Home</NavLink></li>
-            <li><NavLink className='h-[35px] rounded-full mx-1'><AiFillPicture />Media</NavLink></li>
-            <li><NavLink className='h-[35px] rounded-full mx-1'><AiFillMessage />Message</NavLink></li>
+            <div className="tooltip tooltip-bottom" data-tip="Home"><li><NavLink to='/' className={({isActive}) => isActive ? 'active text-xl rounded-full mx-4 px-8' : 'undefined text-xl rounded-full mx-4 px-8'}><AiFillHome /></NavLink></li></div>
+            <div className="tooltip tooltip-bottom" data-tip="Media"><li><NavLink to='/media' className='text-xl rounded-full mx-4 px-8'><AiFillPicture /></NavLink></li></div>
+            <div className="tooltip tooltip-bottom" data-tip="Message"><li><NavLink to='/message' className='text-xl rounded-full mx-4 px-8'><AiFillMessage /></NavLink></li></div>
           </ul>
         </div>
         <div className="navbar-end">
