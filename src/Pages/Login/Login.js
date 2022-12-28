@@ -16,12 +16,12 @@ const Login = () => {
         <h2 className='text-3xl font-bold mb-8'>Log In</h2>
         <div className="form-control w-full max-w-sm my-5">
           <p className='mb-2 text-sm'>Your Email</p>
-          <input {...register('email', {required: 'Email is required'})} type="text" name='email' placeholder="Email" className="input input-bordered w-full max-w-sm rounded-lg" />
+          <input {...register('email', {required: 'Email is required'})} type="email" name='email' placeholder="Email" className="input input-bordered w-full max-w-sm rounded-lg focus:outline-none focus:border focus:border-blue-500" />
           {errors.email && <p className="text-red-500"><small>*{errors?.email?.message}</small></p>}
         </div>
         <div className="form-control w-full max-w-sm my-5">
           <p className='mb-2 text-sm'>Your Password</p>
-          <input {...register('password', {required: 'Password is required'})} type="password" name='password' placeholder="Password" className="input input-bordered w-full max-w-sm rounded-lg" />
+          <input {...register('password', {required: 'Password is required'})} type="password" name='password' placeholder="Password" className="input input-bordered w-full max-w-sm rounded-lg focus:outline-none focus:border focus:border-blue-500" />
           {errors.password && <p className="text-red-500"><small>*{errors?.password?.message}</small></p>}
         </div>
         <div>

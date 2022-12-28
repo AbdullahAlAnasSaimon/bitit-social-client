@@ -17,25 +17,25 @@ const SignUp = () => {
 
         <div className="form-control w-full max-w-sm my-5">
           <p className='mb-2 text-sm'>Your Name</p>
-          <input {...register('name', {required: 'Name is required'})} type="text" name='name' placeholder="Name" className="input input-bordered w-full max-w-sm rounded-lg" required/>
+          <input {...register('name', {required: 'Name is required'})} type="text" name='name' placeholder="Name" className="input input-bordered w-full max-w-sm rounded-lg focus:outline-none focus:border focus:border-blue-500" />
           {errors.name && <p className="text-red-500"><small>*{errors?.name?.message}</small></p>}
         </div>
         
         <div className="form-control w-full max-w-sm my-5">
           <p className='mb-2 text-sm'>Your Email</p>
-          <input {...register('email', {required: 'Email is required'})} type="text" name='email' placeholder="Email" className="input input-bordered w-full max-w-sm rounded-lg" required/>
+          <input {...register('email', {required: 'Email is required'})} type="email" name='email' placeholder="Email" className="input input-bordered w-full max-w-sm rounded-lg focus:outline-none focus:border focus:border-blue-500" />
           {errors.email && <p className="text-red-500"><small>*{errors?.email?.message}</small></p>}
         </div>
 
         <div className="form-control w-full max-w-sm my-5">
           <p className='mb-2 text-sm'>Your Password</p>
-          <input {...register('password', {required: 'Password is required'})} type="password" name='password' placeholder="Password" className="input input-bordered w-full max-w-sm rounded-lg" required/>
+          <input {...register('password', {required: 'Password is required', pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password should contain 1 Uppercase, 1 number, 1 special character' }, minLength: { value: 6, message: 'Password must be 6 character or longer' }})} type="password" name='password' placeholder="Password" className="input input-bordered w-full max-w-sm rounded-lg focus:outline-none focus:border focus:border-blue-500" />
           {errors.password && <p className="text-red-500"><small>*{errors?.password?.message}</small></p>}
         </div>
 
         <div className="form-control w-full max-w-sm my-5">
           <p className='mb-2 text-sm'>Your Photo</p>
-          <input {...register('photo', {required: 'Photo is required'})} type="text" name='photo' placeholder="Photo URL" className="input input-bordered w-full max-w-sm rounded-lg" required/>
+          <input {...register('photo', {required: 'Photo is required'})} type="text" name='photo' placeholder="Photo URL" className="input input-bordered w-full max-w-sm rounded-lg focus:outline-none focus:border focus:border-blue-500" />
           {errors.photo && <p className="text-red-500"><small>*{errors?.photo?.message}</small></p>}
         </div>
 
