@@ -12,7 +12,7 @@ const Post = () => {
     setShowArea(false);
   }
   return (
-    <div className='p-5 col-span-2 bg-[#2b2b2b] rounded-lg'>
+    <div className='p-5 col-span-2 bg-[#2b2b2b] rounded-lg w-10/12 mx-auto'>
       <div className='flex'>
         <input type="text" placeholder="What's on your mind? " className="input input-bordered border-2 border-transparent focus:outline-none focus:border-2 focus:border-blue-500 bg-zinc-900 w-full rounded-full" />
         <div className="tooltip tooltip-bottom z-10" data-tip="Upload Image"><button onClick={handleDragAndDropArea} className='btn rounded-full ml-2'><BsImages className='text-red-500' /></button></div>
