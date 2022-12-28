@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const RightSideNav = () => {
-  const {user, googleSignIn, setUser, setLoading} = useContext(AuthContext);
+  const {user, googleSignIn, setUser} = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const navigate = useNavigate();
 
@@ -20,7 +20,6 @@ const RightSideNav = () => {
       })
       .catch(err => {
         toast.error(err.message);
-        setLoading(false);
       });
   }
 
