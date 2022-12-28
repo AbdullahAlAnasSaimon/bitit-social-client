@@ -1,18 +1,20 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const SignUp = () => {
   const { userSignUp, updateUserInfo, logOut } = useContext(AuthContext);
   const { register, formState: { errors }, handleSubmit } = useForm();
+  const navigate = useNavigate();
 
   const handleLogin = (data) => {
     userSignUp(data?.email, data?.password)
     .then(result =>{
       toast.success('Account Created Successfully');
       logOut();
+      navigate('/login');
       const userProfile = {
         displayName: data?.name,
         photoURL: data?.photo
