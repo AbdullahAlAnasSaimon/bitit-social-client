@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AiFillHome, AiFillMessage, AiFillPicture } from 'react-icons/ai';
 import './Header.css';
+import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 
 const Header = () => {
+  const {user} = useContext(AuthContext);
   return (
     <div className='border-b border-gray-700'>
       <div className="navbar bg-base-100 p-0 min-h-[50px] w-full md:w-11/12 mx-auto">
@@ -37,6 +39,7 @@ const Header = () => {
             </button>
             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
               <li><NavLink to=''>About</NavLink></li>
+              <li><a>{user?.name}</a></li>
               <li><a>Logout</a></li>
             </ul>
           </div>
