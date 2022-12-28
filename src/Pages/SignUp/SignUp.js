@@ -1,13 +1,27 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const SignUp = () => {
+  const { userSignUp, updateUserInfo, logOut } = useContext(AuthContext);
+  const { register, formState: { errors }, handleSubmit } = useForm();
 
-  const { register, formState: {errors}, handleSubmit } = useForm();
-
-  const handleLogin = (data) =>{
-    console.log(data);
+  const handleLogin = (data) => {
+    userSignUp(data?.email, data?.password)
+    .then(result =>{
+      toast.success('Account Created Successfully');
+      logOut();
+      const userProfile = {
+        displayName: data?.name,
+        photoURL: data?.photo
+      }
+      updateUserInfo(userProfile)
+      .then(() => {})
+      .catch(err => toast.error(err.message));
+    })
+    .catch(err => toast.error(err.message));
   }
 
   return (
@@ -17,25 +31,25 @@ const SignUp = () => {
 
         <div className="form-control w-full max-w-sm my-5">
           <p className='mb-2 text-sm'>Your Name</p>
-          <input {...register('name', {required: 'Name is required'})} type="text" name='name' placeholder="Name" className="input input-bordered w-full max-w-sm rounded-lg focus:outline-none focus:border focus:border-blue-500" />
+          <input {...register('name', { required: 'Name is required' })} type="text" name='name' placeholder="Name" className="input input-bordered w-full max-w-sm rounded-lg focus:outline-none focus:border focus:border-blue-500" />
           {errors.name && <p className="text-red-500"><small>*{errors?.name?.message}</small></p>}
         </div>
-        
+
         <div className="form-control w-full max-w-sm my-5">
           <p className='mb-2 text-sm'>Your Email</p>
-          <input {...register('email', {required: 'Email is required'})} type="email" name='email' placeholder="Email" className="input input-bordered w-full max-w-sm rounded-lg focus:outline-none focus:border focus:border-blue-500" />
+          <input {...register('email', { required: 'Email is required' })} type="email" name='email' placeholder="Email" className="input input-bordered w-full max-w-sm rounded-lg focus:outline-none focus:border focus:border-blue-500" />
           {errors.email && <p className="text-red-500"><small>*{errors?.email?.message}</small></p>}
         </div>
 
         <div className="form-control w-full max-w-sm my-5">
           <p className='mb-2 text-sm'>Your Password</p>
-          <input {...register('password', {required: 'Password is required', pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password should contain 1 Uppercase, 1 number, 1 special character' }, minLength: { value: 6, message: 'Password must be 6 character or longer' }})} type="password" name='password' placeholder="Password" className="input input-bordered w-full max-w-sm rounded-lg focus:outline-none focus:border focus:border-blue-500" />
+          <input {...register('password', { required: 'Password is required', pattern: { value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])/, message: 'Password should contain 1 Uppercase, 1 number, 1 special character' }, minLength: { value: 6, message: 'Password must be 6 character or longer' } })} type="password" name='password' placeholder="Password" className="input input-bordered w-full max-w-sm rounded-lg focus:outline-none focus:border focus:border-blue-500" />
           {errors.password && <p className="text-red-500"><small>*{errors?.password?.message}</small></p>}
         </div>
 
         <div className="form-control w-full max-w-sm my-5">
           <p className='mb-2 text-sm'>Your Photo</p>
-          <input {...register('photo', {required: 'Photo is required'})} type="text" name='photo' placeholder="Photo URL" className="input input-bordered w-full max-w-sm rounded-lg focus:outline-none focus:border focus:border-blue-500" />
+          <input {...register('photo', { required: 'Photo is required' })} type="text" name='photo' placeholder="Photo URL" className="input input-bordered w-full max-w-sm rounded-lg focus:outline-none focus:border focus:border-blue-500" />
           {errors.photo && <p className="text-red-500"><small>*{errors?.photo?.message}</small></p>}
         </div>
 
