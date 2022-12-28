@@ -8,6 +8,7 @@ import './Post.module.css';
 const Post = () => {
   const { user } = useContext(AuthContext);
   const [showArea, setShowArea] = useState(false);
+
   const handleDragAndDropArea = () => {
     setShowArea(true);
   }
