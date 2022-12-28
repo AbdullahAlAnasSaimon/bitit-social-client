@@ -1,12 +1,13 @@
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AiFillHome, AiFillMessage, AiFillPicture } from 'react-icons/ai';
+import {HiUserCircle} from 'react-icons/hi';
 import './Header.css';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 
 const Header = () => {
-  const {user} = useContext(AuthContext);
+  const {user, logOut} = useContext(AuthContext);
   return (
     <div className='border-b border-gray-700'>
       <div className="navbar bg-base-100 p-0 min-h-[50px] w-full md:w-11/12 mx-auto">
@@ -31,18 +32,22 @@ const Header = () => {
           </ul>
         </div>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end">
-            <button tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src="https://placeimg.com/80/80/people" alt='' />
-              </div>
-            </button>
-            <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-              <li><NavLink to=''>About</NavLink></li>
-              <li><a>{user?.email}</a></li>
-              <li><a>Logout</a></li>
-            </ul>
-          </div>
+          {
+            user ? 
+            <div className="dropdown dropdown-end">
+              <button tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                  {user?.photoURL ? <img src={user?.photoURL} alt='User' /> : <HiUserCircle className='text-[40px]'/>}
+                </div>
+              </button>
+              <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
+                <li><NavLink to=''>About</NavLink></li>
+                <li><a>{user?.email}</a></li>
+                <li><button onClick={() => logOut()}>Log Out</button></li>
+              </ul>
+            </div> 
+            : <Link to='/login'>Log In</Link>
+          }
         </div>
       </div>
     </div>

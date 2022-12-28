@@ -6,12 +6,18 @@ import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Login = () => {
-  const {googleSignIn, setUser} = useContext(AuthContext);
+  const {googleSignIn, setUser, userLogIn} = useContext(AuthContext);
   const { register, formState: {errors}, handleSubmit } = useForm();
   const googleProvider = new GoogleAuthProvider();
 
   const handleLogin = (data) =>{
-    console.log(data);
+    userLogIn(data?.email, data?.password)
+    .then(result => {
+      const user = result.user;
+      setUser(user);
+      toast.success('Log In Successfully');
+    })
+    .catch(err => toast.error(err.message))
   }
 
   const handleGoogleSignIn = () =>{
