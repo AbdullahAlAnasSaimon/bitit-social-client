@@ -1,7 +1,9 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../../Context/AuthProvider/AuthProvider";
 import Loading from "../Shared/Loading/Loading";
+import LeftSideNav from "./LeftSideNav/LeftSideNav";
 import Post from "./Post/Post";
+import RightSideNav from "./RightSideNav/RightSideNav";
 
 const Home = () => {
   const {loading} = useContext(AuthContext);
@@ -10,12 +12,10 @@ const Home = () => {
   }
   return (
     <div className='grid grid-cols-4 mt-5'>
-      <div>
-        <h2>section</h2>
-      </div>
+      <LeftSideNav></LeftSideNav>
       <Post></Post>
-      <div>
-        <h2>section</h2>
+      <div className="sticky top-0">
+      <RightSideNav></RightSideNav>
       </div>
     </div>
   );

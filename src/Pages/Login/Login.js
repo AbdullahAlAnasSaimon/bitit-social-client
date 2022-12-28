@@ -32,11 +32,12 @@ const Login = () => {
     googleSignIn(googleProvider)
       .then(result => {
         const user = result.user;
-        console.log(user);
-        setUser(user);
         toast.success('Log In Successfull');
+        navigate('/');
       })
-      .catch(err => toast.error(err.message));
+      .catch(err => {
+        toast.error(err.message);
+      });
   }
 
   return (
