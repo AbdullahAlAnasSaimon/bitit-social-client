@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import { GoogleAuthProvider } from 'firebase/auth';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 
 const Login = () => {
-
+  const {googleSignIn, setUser} = useContext(AuthContext);
   const { register, formState: {errors}, handleSubmit } = useForm();
+  const googleProvider = new GoogleAuthProvider();
 
   const handleLogin = (data) =>{
     console.log(data);
+  }
+
+  const handleGoogleSignIn = () =>{
+    googleSignIn(googleProvider)
+      .then(result => {
+        const user = result.user;
+        console.log(user);
+        setUser(user);
+        toast.success('Log In Successfull');
+      })
+      .catch(err => toast.error(err.message));
   }
 
   return (
@@ -28,8 +43,11 @@ const Login = () => {
         <p className='text-sm'>Forget Password</p>
         </div>
         <button className='bg-blue-500 hover:bg-blue-600 text-white mt-5 w-full font-semibold h-[45px] rounded-lg duration-300' type="submit">Log In</button>
-        <p className='text-center mt-5'>New to Bitit? <Link to='/signup' className='text-blue-500 underline'>Create an account</Link></p>
       </form>
+        <p className='text-center mt-5'>New to Bitit? <Link to='/signup' className='text-blue-500 underline'>Create an account</Link></p>
+        <div className="divider">OR</div>
+        <button onClick={handleGoogleSignIn} className='bg-white hover:bg-gray-200 text-blue-500 mt-3 w-full font-semibold h-[45px] rounded-lg duration-300' type="submit">Continue With Google</button>
+        
     </div>
   );
 };

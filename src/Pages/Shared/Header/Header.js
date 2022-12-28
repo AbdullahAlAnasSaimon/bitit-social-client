@@ -39,7 +39,7 @@ const Header = () => {
             </button>
             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
               <li><NavLink to=''>About</NavLink></li>
-              <li><a>{user?.name}</a></li>
+              <li><a>{user?.email}</a></li>
               <li><a>Logout</a></li>
             </ul>
           </div>
