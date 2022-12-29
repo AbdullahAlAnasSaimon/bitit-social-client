@@ -8,7 +8,7 @@ const Home = () => {
     <div className='grid grid-cols-4 mt-5'>
       <LeftSideNav></LeftSideNav>
       <Post></Post>
-      <div className="sticky top-0">
+      <div className="">
       <RightSideNav></RightSideNav>
       </div>
     </div>

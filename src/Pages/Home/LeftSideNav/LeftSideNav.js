@@ -9,7 +9,7 @@ const LeftSideNav = () => {
     <div>
       {
         user && <ul className='menu'>
-        <li><Link><span className='avatar w-10 rounded-full'>{user?.photoURL ? <img src={user?.photoURL} alt=""  className='rounded-full'/> : <HiUserCircle className='text-[40px]'/>}</span> {user?.displayName}</Link></li>
+        <li><Link to='/aboutme'><span className='avatar w-10 h-10 rounded-full'>{user?.photoURL ? <img src={user?.photoURL} alt=""  className='rounded-full'/> : <HiUserCircle className='text-[40px]'/>}</span> {user?.displayName}</Link></li>
       </ul>
       }
     </div>

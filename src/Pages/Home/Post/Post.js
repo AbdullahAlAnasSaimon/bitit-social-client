@@ -104,7 +104,7 @@ const Post = () => {
         user ? <>
           <form onSubmit={handleSubmit(handlePostSubmit)}>
             <div className='flex'>
-              <Link><span className='avatar w-12 rounded-full mr-2'>{user?.photoURL ? <img src={user?.photoURL} alt="" className='rounded-full w-10' /> : <HiUserCircle className="text-[41px]" />}</span></Link>
+              <Link><span className='avatar w-12 h-12 rounded-full mr-2'>{user?.photoURL ? <img src={user?.photoURL} alt="" className='rounded-full w-10' /> : <HiUserCircle className="text-[41px]" />}</span></Link>
               <input {...register("post", { minLength: { value: 10, message: 'Write Minimum 10 Character in Input field' }, required: 'Write Minimum 10 Character in Input field' })} name="post" type="text" placeholder="What's on your mind? " className="input input-bordered border-2 border-transparent focus:outline-none focus:border-2 focus:border-blue-500 bg-zinc-900 w-full rounded-full" />
               <div className="tooltip tooltip-bottom z-10" data-tip="Upload Image"><button onClick={handleDragAndDropArea} className='btn rounded-full ml-2'><BsImages className='text-red-500' /></button></div>
             </div>

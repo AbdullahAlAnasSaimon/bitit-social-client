@@ -18,7 +18,7 @@ const SignUp = () => {
       setProcessing(false);
       logOut();
       navigate('/login');
-      saveUserToDb(data?.name, data?.email);
+      saveUserToDb(data?.name, data?.email, data?.photo);
       const userProfile = {
         displayName: data?.name,
         photoURL: data?.photo
@@ -33,14 +33,15 @@ const SignUp = () => {
     });
   }
 
-  const saveUserToDb = (name, email) =>{
+  const saveUserToDb = (name, email, photo) =>{
     const userInfo = {
       name, 
       email,
+      photo,
       address: '',
       university: ''
     };
-    fetch('http://localhost:5000//users', {
+    fetch('http://localhost:5000/users', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'

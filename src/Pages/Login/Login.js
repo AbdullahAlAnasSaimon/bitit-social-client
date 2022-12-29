@@ -21,6 +21,7 @@ const Login = () => {
         setProcessing(false);
         toast.success('Log In Successfully');
         navigate('/');
+        
       })
       .catch(err => {
         toast.error(err.message);
@@ -34,21 +35,22 @@ const Login = () => {
         const user = result.user;
         toast.success('Log In Successfull');
         navigate('/');
-        saveUserToDb(user?.displayName, user?.email);
+        saveUserToDb(user?.displayName, user?.email, user?.photoURL);
       })
       .catch(err => {
         toast.error(err.message);
       });
   }
 
-  const saveUserToDb = (name, email) =>{
+  const saveUserToDb = (name, email, photo) =>{
     const userInfo = {
       name, 
       email,
+      photo,
       address: '',
       university: ''
     };
-    fetch('http://localhost:5000//users', {
+    fetch('http://localhost:5000/users', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'

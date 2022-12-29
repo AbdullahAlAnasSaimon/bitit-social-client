@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const RightSideNav = () => {
-  const {user, googleSignIn, setUser} = useContext(AuthContext);
+  const {googleSignIn, setUser} = useContext(AuthContext);
   const googleProvider = new GoogleAuthProvider();
   const navigate = useNavigate();
 
@@ -14,7 +14,7 @@ const RightSideNav = () => {
       .then(result => {
         const user = result.user;
         setUser(user);
-        saveUserToDb(user?.displayName, user?.email);
+        saveUserToDb(user?.displayName, user?.email, user?.photoURL);
         toast.success('Log In Successfull');
         navigate('/');
       })
@@ -23,14 +23,15 @@ const RightSideNav = () => {
       });
   }
 
-  const saveUserToDb = (name, email) =>{
+  const saveUserToDb = (name, email, photo) =>{
     const userInfo = {
       name,
       email,
+      photo,
       address: '',
       university: ''
     };
-    fetch('http://localhost:5000//users', {
+    fetch('http://localhost:5000/users', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'
@@ -42,7 +43,7 @@ const RightSideNav = () => {
   }
 
   return (
-    <div className='w-11/12 border border-zinc-700 p-3 rounded-lg sticky top-0'>
+    <div className='w-11/12 border border-zinc-700 p-3 rounded-lg'>
       <h2 className='text-xl font-bold mb-5 text-white'>New to Bitit?</h2>
       <button onClick={handleGoogleSignIn} className='bg-white hover:bg-gray-200 text-zinc-700 w-full font-semibold text-sm h-[40px] rounded-full mb-3 duration-300' type="submit">Continue With Google</button>
       <Link to='/signup'><button className='bg-white hover:bg-gray-200 text-zinc-700 w-full font-semibold text-sm h-[40px] rounded-full duration-300' type="submit">Sign Up with Email And Password</button></Link>
