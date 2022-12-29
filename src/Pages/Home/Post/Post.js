@@ -34,10 +34,11 @@ const Post = () => {
         user_email: user?.email,
         user_photo: user?.photoURL,
         post_text: data?.post,
+        post_like: 0,
         post_time: time,
       };
       console.log(postData);
-      fetch('http://localhost:5000/posts', {
+      fetch('https://bitit-server.vercel.app/posts', {
         method: 'POST',
         headers: {
           'content-type': 'application/json'
@@ -72,10 +73,11 @@ const Post = () => {
               user_photo: user?.photoURL,
               post_text: data?.post,
               post_photo: imageData.data.url ? imageData.data.url : null,
+              post_like: 0,
               post_time: time,
             };
             console.log(postData);
-            fetch('http://localhost:5000/posts', {
+            fetch('https://bitit-server.vercel.app/posts', {
               method: 'POST',
               headers: {
                 'content-type': 'application/json'

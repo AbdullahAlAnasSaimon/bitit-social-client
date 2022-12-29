@@ -7,11 +7,13 @@ const Media = () => {
   const {data: posts, isLoading} = useQuery({
     queryKey: ['userPost'],
     queryFn: async() =>{
-      const res = await fetch('http://localhost:5000/posts');
+      const res = await fetch('https://bitit-server.vercel.app/posts');
       const data = await res.json();
       return data;
     }
   })
+
+
 
   if(isLoading){
     return <Loading/>
@@ -22,7 +24,7 @@ const Media = () => {
       <div></div>
       <div className='col-span-2'>
         {
-          posts.map(post => <SinglePost
+          posts?.map(post => <SinglePost
           key={post?._id}
           post={post}
           ></SinglePost>)

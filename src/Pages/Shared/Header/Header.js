@@ -9,8 +9,8 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 const Header = () => {
   const {user, logOut} = useContext(AuthContext);
   return (
-    <div className='border-b border-zinc-800 sticky top-0'>
-      <div className="navbar bg-base-100 p-0 min-h-[50px] w-full md:w-11/12 mx-auto">
+    <div className='sticky top-0'>
+      <div className="navbar bg-base-100 p-0 min-h-[50px] w-full border-b border-zinc-800">
         <div className="navbar-start">
           <div className="dropdown">
             <button tabIndex={0} className="btn btn-ghost btn-circle lg:hidden">
@@ -40,8 +40,8 @@ const Header = () => {
                   {user?.photoURL ? <img src={user?.photoURL} alt='User' /> : <HiUserCircle className='text-[40px]'/>}
                 </div>
               </button>
-              <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                <li><NavLink to=''>About</NavLink></li>
+              <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-[999]">
+                <li><NavLink to='/aboutme'>About</NavLink></li>
                 <li><button onClick={() => logOut()}>Log Out</button></li>
               </ul>
             </div> 
