@@ -18,6 +18,7 @@ const SignUp = () => {
       setProcessing(false);
       logOut();
       navigate('/login');
+      saveUserToDb(data?.name, data?.email);
       const userProfile = {
         displayName: data?.name,
         photoURL: data?.photo
@@ -30,6 +31,24 @@ const SignUp = () => {
       toast.error(err.message);
       setProcessing(false);
     });
+  }
+
+  const saveUserToDb = (name, email) =>{
+    const userInfo = {
+      name, 
+      email,
+      address: '',
+      university: ''
+    };
+    fetch('http://localhost:5000//users', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(userInfo)
+        })
+        .then(res => res.json())
+        .then(() =>{})
   }
 
   return (

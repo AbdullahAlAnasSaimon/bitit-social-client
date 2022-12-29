@@ -13,14 +13,32 @@ const RightSideNav = () => {
     googleSignIn(googleProvider)
       .then(result => {
         const user = result.user;
-        console.log(user);
         setUser(user);
+        saveUserToDb(user?.displayName, user?.email);
         toast.success('Log In Successfull');
         navigate('/');
       })
       .catch(err => {
         toast.error(err.message);
       });
+  }
+
+  const saveUserToDb = (name, email) =>{
+    const userInfo = {
+      name,
+      email,
+      address: '',
+      university: ''
+    };
+    fetch('http://localhost:5000//users', {
+          method: 'POST',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify(userInfo)
+        })
+        .then(res => res.json())
+        .then(() =>{})
   }
 
   return (

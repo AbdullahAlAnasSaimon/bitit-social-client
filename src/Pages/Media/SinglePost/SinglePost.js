@@ -4,12 +4,9 @@ import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 import { RiSendPlaneFill } from 'react-icons/ri';
 import { FaCommentAlt } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
-import { useQuery } from '@tanstack/react-query';
-import { async } from '@firebase/util';
-import Loading from '../../Shared/Loading/Loading';
 
 const SinglePost = ({ post }) => {
-  const { register, formState: { errors }, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();
   const [liked, setLiked] = useState(false);
   const [toggle,setToggle] = useState(false);
   const [hitLike, setHitLike] = useState(0);

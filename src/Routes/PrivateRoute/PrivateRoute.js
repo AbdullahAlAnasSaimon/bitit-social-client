@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { Navigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import Loading from '../../Pages/Shared/Loading/Loading';
 
@@ -11,7 +12,7 @@ const PrivateRoute = ({children}) => {
     return children;
   }
   else {
-    return;
+    return <Navigate to='/login'></Navigate>
   }
 };
 
