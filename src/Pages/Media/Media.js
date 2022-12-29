@@ -12,15 +12,15 @@ const Media = () => {
       return data;
     }
   })
-  
+
   if(isLoading){
     return <Loading/>
   }
 
   return (
-    <div className='grid grid-cols-3'>
+    <div className='grid grid-cols-4 mt-5'>
       <div></div>
-      <div>
+      <div className='col-span-2'>
         {
           posts.map(post => <SinglePost
           key={post?._id}

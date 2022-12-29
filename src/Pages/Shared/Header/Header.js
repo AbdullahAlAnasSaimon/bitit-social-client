@@ -9,7 +9,7 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 const Header = () => {
   const {user, logOut} = useContext(AuthContext);
   return (
-    <div className='border-b border-zinc-800'>
+    <div className='border-b border-zinc-800 sticky top-0'>
       <div className="navbar bg-base-100 p-0 min-h-[50px] w-full md:w-11/12 mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
