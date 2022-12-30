@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React from 'react';
 import Loading from '../Shared/Loading/Loading';
 import SinglePost from './SinglePost/SinglePost';
 
@@ -8,7 +8,7 @@ const Media = () => {
   const { data: posts, isLoading, refetch } = useQuery({
     queryKey: ['userPost'],
     queryFn: async () => {
-      const res = await fetch('https://bitit-server.vercel.app/posts');
+      const res = await fetch('http://localhost:5000/posts');
       const data = await res.json();
       return data;
     }
