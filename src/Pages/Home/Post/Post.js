@@ -74,6 +74,7 @@ const Post = () => {
               post_text: data?.post,
               post_photo: imageData.data.url ? imageData.data.url : null,
               post_like: 0,
+              post_comment: 0,
               post_time: time,
             };
             console.log(postData);

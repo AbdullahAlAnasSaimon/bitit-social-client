@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { AiFillLike, AiOutlineLike } from 'react-icons/ai';
 import { RiSendPlaneFill } from 'react-icons/ri';
@@ -8,14 +8,15 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import { Link } from 'react-router-dom';
 import Comment from '../Comment/Comment';
 
-const SinglePost = ({ post, handleToggleComment, toggle, setToggle, refetch }) => {
+const SinglePost = ({ post, refetch }) => {
   const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const [liked, setLiked] = useState(false);
-
+  const [toggle, setToggle] = useState(false);
   const [processing, setProcessing] = useState(false);
-  const { post_photo, post_text, post_time, user_name, user_photo, post_like } = post;
-  
+  const [postComments, setPostComments] = useState([]);
+  const { post_photo, post_text, post_time, user_name, user_photo, post_like, post_comment } = post;
+
   let likeReactCount = post_like;
 
 
@@ -23,42 +24,49 @@ const SinglePost = ({ post, handleToggleComment, toggle, setToggle, refetch }) =
     if (!liked) {
       setLiked(true);
       likeReactCount += 1;
-      fetch(`http://localhost:5000/post-like/${post?._id}`,{
+      fetch(`http://localhost:5000/post-like/${post?._id}`, {
         method: 'PUT',
         headers: {
           'content-type': 'application/json'
         },
-        body: JSON.stringify({likeReactCount})
+        body: JSON.stringify({ likeReactCount })
       })
-      .then(res => res.json())
-      .then(data =>{
-        console.log(data);
-      })
+        .then(res => res.json())
+        .then(() => { })
     }
     else {
       const confirmRemoveLike = window.confirm('Are you sure to remove the like');
       if (confirmRemoveLike) {
         setLiked(false);
         likeReactCount -= 1;
-        fetch(`http://localhost:5000/post-like/${post?._id}`,{
-        method: 'PUT',
-        headers: {
-          'content-type': 'application/json'
-        },
-        body: JSON.stringify({likeReactCount})
-      })
-      .then(res => res.json())
-      .then(data =>{
-        console.log(data);
-      })
+        fetch(`http://localhost:5000/post-like/${post?._id}`, {
+          method: 'PUT',
+          headers: {
+            'content-type': 'application/json'
+          },
+          body: JSON.stringify({ likeReactCount })
+        })
+          .then(res => res.json())
+          .then(() => { })
       }
     }
 
   }
 
+  const handleToggleComment = (event) => {
+    event.preventDefault();
+    if (!toggle) {
+      setToggle(true);
+    }
+    else {
+      setToggle(false);
+    }
+  }
+
   const handlePostComment = (data) => {
     setProcessing(true);
     const time = new Date().toString();
+
     const commentData = {
       post_id: post?._id,
       comment_text: data?.comment,
@@ -66,7 +74,8 @@ const SinglePost = ({ post, handleToggleComment, toggle, setToggle, refetch }) =
       user_name: user?.displayName,
       post_time: time
     }
-    fetch('https://bitit-server.vercel.app/comment', {
+
+    fetch('http://localhost:5000/comment', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -80,8 +89,20 @@ const SinglePost = ({ post, handleToggleComment, toggle, setToggle, refetch }) =
           toast.success('Commented successfully');
         }
       })
-      .catch(err => { toast.error(err.message); setProcessing(false) })
+      .catch(err => {
+        toast.error(err.message);
+        setProcessing(false);
+      })
   }
+
+  const handleShowComments = postId =>{
+
+    fetch(`http://localhost:5000/comment?post_id=${postId}`)
+    .then(res => res.json())
+    .then(data =>{
+      setPostComments(data);
+    })
+  } 
 
   refetch();
 
@@ -105,19 +126,29 @@ const SinglePost = ({ post, handleToggleComment, toggle, setToggle, refetch }) =
         <p className='m-3'>{post_text}</p>
         {post_photo && <img src={post_photo} alt="" className='w-full' />}
       </div>
-      <div className='border-t border-zinc-800'>
-        {post_like && <p className='text-sm'><AiFillLike className='inline-block'/> {post_like}</p>}
+      <div className='flex justify-between my-2'>
+        {post_like > 0 && <div className='flex items-center mx-3'><AiFillLike className='inline-block text-sm bg-blue-600 rounded-full p-[2px] mr-[2px]' /><p className='text-sm'> {post_like}</p></div>}
+        {post_comment > 0 && <button onClick={() => handleShowComments(post?._id)} className='text-sm text-blue-500 hover:underline mr-3'>{post_comment} Comment</button>}
       </div>
       <div className='flex justify-around border-t border-zinc-800'>
         <button onClick={handleLikeReact} className={`bg-gray-300/30 ${liked && 'bg-blue-300/30 hover:bg-blue-300/40'} hover:bg-gray-300/40 w-full mx-5 my-5 py-1 rounded-lg duration-300`}>{liked ? <AiFillLike className='text-center w-full text-2xl text-blue-500' /> : <AiOutlineLike className='text-center w-full text-2xl' />}</button>
         {/* <AiFillLike/> */}
         <button onClick={handleToggleComment} className='bg-gray-300/30 hover:bg-gray-300/40 w-full mx-5 my-5 py-1 rounded-lg duration-300'><FaCommentAlt className='text-center w-full' /></button>
       </div>
-
-      <div className={`${toggle ? 'visible' : 'hidden'}`}>
+      <div>
+        {
+          postComments?.map(comment => <Comment
+          key={comment?._id}
+          comment={comment}
+          refetch={refetch}
+          ></Comment>)
+        }
+      </div>
+      <div className={`${toggle ? 'visible' : 'hidden'} py-2`}>
         <form onSubmit={handleSubmit(handlePostComment)} className="flex items-center m-2">
           <img src={user?.photoURL} alt="" className='rounded-full w-8 h-8 mr-2' />
-          <input {...register("comment", { minLength: { value: 1 }, required: true })} name="comment" type="text" placeholder="Write your opinion" className="input input-bordered border border-zinc-700 focus:outline-none focus:border focus:border-blue-500 bg-zinc-900 w-full rounded-full h-[35px] text-[13px]" />
+          <input {...register("comment", { minLength: { value: 1 }, required: true })} name="comment" type="text" placeholder="Write your opinion" className="input input-bordered border border-zinc-700 focus:outline-none focus:border focus:border-blue-500 bg-zinc-800 w-full rounded-full h-[35px] text-[13px]" />
+
           <button className='bg-blue-500 h-[35px] w-[41px] rounded-full ml-2 duration-300' type="submit" disabled={processing}>{processing ? <>
             <div className="text-center">
               <div role="status">
@@ -132,9 +163,7 @@ const SinglePost = ({ post, handleToggleComment, toggle, setToggle, refetch }) =
         </form>
       </div>
 
-      <div>
-        {/* <Comment post_id={post?._id}></Comment> */}
-      </div>
+      
 
     </div>
   );

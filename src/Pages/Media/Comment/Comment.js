@@ -1,22 +1,21 @@
-import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
-const Comment = ({post_id}) => {
+const Comment = ({ comment, refetch }) => {
 
-  const {data: comments, isLoading} = useQuery({
-    queryKey: ['comment'],
-    queryFn: async () =>{
-      const res = await fetch(`http://localhost:5000/comment?post_id=${post_id}`);
-      const data = await res.json();
-      return data;
-    }
-  })
-
-  console.log(comments);
+  const { comment_text, user_name, user_photo, post_time } = comment;
 
   return (
-    <div>
-      
+    <div className='mx-5 my-2 bg-zinc-800 p-2 rounded-xl'>
+      <div className='flex'>
+        <div>
+          <img src={user_photo} alt="" className='w-8 h-8 rounded-full' />
+        </div>
+        <div className='text-[12px] inline-block ml-2'>
+          <p>{user_name} </p>
+          <p className='text-[10px]'>{post_time.slice(0, 21)}</p>
+        </div>
+      </div>
+      <p className='m-2 text-sm'>{comment_text}</p>
     </div>
   );
 };

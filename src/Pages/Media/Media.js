@@ -4,7 +4,7 @@ import Loading from '../Shared/Loading/Loading';
 import SinglePost from './SinglePost/SinglePost';
 
 const Media = () => {
-  const [toggle, setToggle] = useState(false);
+  
   const { data: posts, isLoading, refetch } = useQuery({
     queryKey: ['userPost'],
     queryFn: async () => {
@@ -14,16 +14,6 @@ const Media = () => {
     }
   })
 
-  const handleToggleComment = (event) => {
-    event.preventDefault();
-    if (!toggle) {
-      setToggle(true);
-      return;
-    }
-    else {
-      setToggle(false);
-    }
-  }
 
 
   if (isLoading) {
@@ -40,9 +30,6 @@ const Media = () => {
           posts?.map(post => <SinglePost
             key={post?._id}
             post={post}
-            handleToggleComment={handleToggleComment}
-            toggle={toggle}
-            setToggle={setToggle}
             refetch={refetch}
           ></SinglePost>)
         }
