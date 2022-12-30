@@ -4,4 +4,5 @@ label {
   margin: 0 auto;
   box-sizing: border-box;
   background-color: #1d1d1d;
+  min-width: 0px !important;
 }

@@ -22,7 +22,7 @@ const Header = () => {
               <li><NavLink to='/message' className='h-[35px] rounded-full mx-1'><AiFillMessage />Message</NavLink></li>
             </ul>
           </div>
-          <Link to='/' className="btn btn-ghost normal-case text-xl">Bitit</Link>
+          <Link to='/' className="btn btn-ghost normal-case text-xl ml-0 lg:ml-3">Bitit</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">
@@ -45,7 +45,7 @@ const Header = () => {
                 <li><button onClick={() => logOut()}>Log Out</button></li>
               </ul>
             </div> 
-            : <Link to='/login'>Log In</Link>
+            : <Link to='/login' className='bg-blue-500 hover:bg-blue-600 duration-300 px-3 py-1 text-zinc-800 rounded-full mr-0 lg:mr-3'>Log In</Link>
           }
         </div>
       </div>

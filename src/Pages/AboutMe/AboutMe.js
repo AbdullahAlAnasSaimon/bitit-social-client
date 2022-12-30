@@ -19,11 +19,11 @@ const AboutMe = () => {
   })
 
   return (
-    <div className='w-10/12 mx-auto grid grid-cols-3'>
-      <div className="rounded-full">
+    <div className='w-10/12 mx-auto grid grid-cols-1 lg:grid-cols-3'>
+      <div className="rounded-full w-[200px] mx-auto lg:mx-0 mt-10">
         {user?.photoURL ? <img src={user?.photoURL} alt='User' className='w-[200px] h-[200px] rounded-full' /> : <HiUserCircle className='text-[200px]' />}
       </div>
-      <div className='col-span-2'>
+      <div className='col-span-2 my-5'>
         <div className='my-5'>
           <p className="text-sm mb-2">Name</p>
           <input value={user?.displayName} type="text" placeholder="Type here" className="input input-bordered w-full bg-zinc-900 rounded-lg" readOnly/>

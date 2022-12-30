@@ -6,44 +6,33 @@ import { FaCommentAlt } from 'react-icons/fa';
 import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import { Link } from 'react-router-dom';
+import Comment from '../Comment/Comment';
 
-const SinglePost = ({ post }) => {
+const SinglePost = ({ post, handleToggleComment, toggle, setToggle }) => {
   const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const [liked, setLiked] = useState(false);
-  const [toggle, setToggle] = useState(false);
+
   const [processing, setProcessing] = useState(false);
-  const [hitLike, setHitLike] = useState(0);
+  let likeReactCount = 0;
 
   const { post_photo, post_text, post_time, user_name, user_photo } = post;
 
 
   const handleLikeReact = () => {
-    setLiked(true);
-    console.log(hitLike);
-    setHitLike((prevCount) => prevCount + 1);
-    // setHitLike(hitLike + 1);
-    console.log(hitLike);
-
-  }
-  const hanldeRemoveLikeReact = () => {
-    const confirmRemoveLike = window.confirm('Are you sure to remove the like');
-    if (confirmRemoveLike) {
-      setLiked(false);
-      console.log(hitLike);
-      setHitLike((prevCount) => prevCount - 1);
-      // setHitLike(hitLike - 1);
-      console.log(hitLike);
-    }
-  }
-
-  const handleToggleComment = () => {
-    if (!toggle) {
-      setToggle(true);
+    if (!liked) {
+      setLiked(true);
+      likeReactCount += 1;
+      console.log(likeReactCount);
     }
     else {
-      setToggle(false);
+      const confirmRemoveLike = window.confirm('Are you sure to remove the like');
+      if (confirmRemoveLike) {
+        setLiked(false);
+        console.log(likeReactCount);
+      }
     }
+
   }
 
   const handlePostComment = (data) => {
@@ -73,8 +62,6 @@ const SinglePost = ({ post }) => {
       .catch(err => { toast.error(err.message); setProcessing(false) })
   }
 
-
-
   return (
     <div className='w-10/12 mx-auto border border-zinc-800 my-5 rounded-lg bg-zinc-900'>
       <div className='flex items-center justify-between'>
@@ -96,7 +83,7 @@ const SinglePost = ({ post }) => {
         {post_photo && <img src={post_photo} alt="" className='w-full' />}
       </div>
       <div className='flex justify-around border-t border-zinc-800'>
-        <button onClick={!liked ? handleLikeReact : hanldeRemoveLikeReact} className={`bg-gray-300/30 ${liked && 'bg-blue-300/30 hover:bg-blue-300/40'} hover:bg-gray-300/40 w-full mx-5 my-5 py-1 rounded-lg duration-300`}>{liked ? <AiFillLike className='text-center w-full text-2xl text-blue-500' /> : <AiOutlineLike className='text-center w-full text-2xl' />}</button>
+        <button onClick={handleLikeReact} className={`bg-gray-300/30 ${liked && 'bg-blue-300/30 hover:bg-blue-300/40'} hover:bg-gray-300/40 w-full mx-5 my-5 py-1 rounded-lg duration-300`}>{liked ? <AiFillLike className='text-center w-full text-2xl text-blue-500' /> : <AiOutlineLike className='text-center w-full text-2xl' />}</button>
         {/* <AiFillLike/> */}
         <button onClick={handleToggleComment} className='bg-gray-300/30 hover:bg-gray-300/40 w-full mx-5 my-5 py-1 rounded-lg duration-300'><FaCommentAlt className='text-center w-full' /></button>
       </div>
@@ -105,7 +92,6 @@ const SinglePost = ({ post }) => {
         <form onSubmit={handleSubmit(handlePostComment)} className="flex items-center m-2">
           <img src={user?.photoURL} alt="" className='rounded-full w-8 h-8 mr-2' />
           <input {...register("comment", { minLength: { value: 1 }, required: true })} name="comment" type="text" placeholder="Write your opinion" className="input input-bordered border border-zinc-700 focus:outline-none focus:border focus:border-blue-500 bg-zinc-900 w-full rounded-full h-[35px] text-[13px]" />
-          {/* <button type="submit" className='bg-blue-500 h-[35px] w-[41px] rounded-full ml-2'></button> */}
           <button className='bg-blue-500 h-[35px] w-[41px] rounded-full ml-2 duration-300' type="submit" disabled={processing}>{processing ? <>
             <div className="text-center">
               <div role="status">
@@ -119,6 +105,11 @@ const SinglePost = ({ post }) => {
           </> : <RiSendPlaneFill className='mx-auto' />} </button>
         </form>
       </div>
+
+      <div>
+        {/* <Comment post_id={post?._id}></Comment> */}
+      </div>
+
     </div>
   );
 };
