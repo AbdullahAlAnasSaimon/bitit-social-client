@@ -21,7 +21,7 @@ const InformationModal = ({setModalStatus}) => {
       })
 
 
-    fetch(`http://localhost:5000/users?email=${storeUserEmail}`, {
+    fetch(`https://bitit-server.vercel.app/users?email=${storeUserEmail}`, {
       method: 'PUT',
       headers: {
         'content-type': 'application/json'

@@ -21,7 +21,7 @@ const Post = () => {
   const { data: loadPosts, isLoading, refetch } = useQuery({
     queryKey: ['posts'],
     queryFn: async () => {
-      const res = await fetch('http://localhost:5000/limited-posts');
+      const res = await fetch('https://bitit-server.vercel.app/limited-posts');
       const data = await res.json();
       return data;
     }

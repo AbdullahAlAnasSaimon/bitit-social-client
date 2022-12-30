@@ -50,7 +50,7 @@ const Login = () => {
       address: '',
       university: ''
     };
-    fetch('http://localhost:5000/users', {
+    fetch('https://bitit-server.vercel.app/users', {
           method: 'POST',
           headers: {
             'content-type': 'application/json'

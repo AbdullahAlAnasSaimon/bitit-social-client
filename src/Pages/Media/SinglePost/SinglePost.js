@@ -24,7 +24,7 @@ const SinglePost = ({ post, refetch }) => {
     if (!liked) {
       setLiked(true);
       likeReactCount += 1;
-      fetch(`http://localhost:5000/post-like/${post?._id}`, {
+      fetch(`https://bitit-server.vercel.app/post-like/${post?._id}`, {
         method: 'PUT',
         headers: {
           'content-type': 'application/json'
@@ -39,7 +39,7 @@ const SinglePost = ({ post, refetch }) => {
       if (confirmRemoveLike) {
         setLiked(false);
         likeReactCount -= 1;
-        fetch(`http://localhost:5000/post-like/${post?._id}`, {
+        fetch(`https://bitit-server.vercel.app/post-like/${post?._id}`, {
           method: 'PUT',
           headers: {
             'content-type': 'application/json'
@@ -75,7 +75,7 @@ const SinglePost = ({ post, refetch }) => {
       post_time: time
     }
 
-    fetch('http://localhost:5000/comment', {
+    fetch('https://bitit-server.vercel.app/comment', {
       method: 'POST',
       headers: {
         'content-type': 'application/json'
@@ -97,7 +97,7 @@ const SinglePost = ({ post, refetch }) => {
 
   const handleShowComments = postId =>{
 
-    fetch(`http://localhost:5000/comment?post_id=${postId}`)
+    fetch(`https://bitit-server.vercel.app/comment?post_id=${postId}`)
     .then(res => res.json())
     .then(data =>{
       setPostComments(data);
