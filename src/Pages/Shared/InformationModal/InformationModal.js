@@ -20,7 +20,6 @@ const InformationModal = ({setModalStatus}) => {
 
     updateUserEmail(data?.email)
       .then(() => {
-        // setUser({...user, address:data?.address, university: data?.university})
         setprocessing(false)
         setModalStatus(false);
         toast.success('Information Updated');

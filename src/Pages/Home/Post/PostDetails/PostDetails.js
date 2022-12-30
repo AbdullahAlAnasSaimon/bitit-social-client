@@ -1,12 +1,33 @@
 import React from 'react';
+import { AiFillLike } from 'react-icons/ai';
 import { useLoaderData } from 'react-router-dom';
 
 const PostDetails = () => {
   const postDetails = useLoaderData();
-  console.log(postDetails);
+  const {post_photo, post_text, post_time, user_name, user_photo, post_like, post_comment} = postDetails;
   return (
-    <div>
-      
+    <div className='grid grid-cols-1 lg:grid-cols-3'>
+      <div className='lg:w-7/12 mx-auto col-span-2'>
+        <img src={post_photo} alt="" className='max-h-[calc(100vh-52px)] min-h-[calc(100vh-52px)]'/>
+      </div>
+      <div className='bg-zinc-900 p-4'>
+        <div className='flex'>
+          <div>
+            <img src={user_photo} alt="" className='w-12 h-12 rounded-full'/>
+          </div>
+          <div className='ml-2'>
+            <p>{user_name}</p>
+            <p className='text-sm'>{post_time.slice(0, 21)}</p>
+          </div>
+        </div>
+        <div className='mb-5'>
+          <p className='text-sm mt-3'>{post_text}</p>
+        </div>
+        <div className='flex justify-between text-sm'>
+          {post_like && <p><AiFillLike className='inline-block text-sm bg-blue-600 rounded-full p-[2px] mr-[2px]' />{post_like}</p>}
+          {post_comment > 0 && <p>{post_comment} comments</p>}
+        </div>
+      </div>
     </div>
   );
 };
