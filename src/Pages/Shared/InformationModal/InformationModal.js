@@ -29,9 +29,7 @@ const InformationModal = ({setModalStatus}) => {
       body: JSON.stringify(data)
     })
     .then(res => res.json())
-    .then(data => {
-      console.log(data);
-    })
+    .then(() => {})
 
     updateUserEmail(data?.email)
       .then(() => {

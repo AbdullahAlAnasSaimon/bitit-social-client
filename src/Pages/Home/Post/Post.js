@@ -27,7 +27,6 @@ const Post = () => {
     }
   })
 
-  console.log(loadPosts);
 
   const handleDragAndDropArea = (e) => {
     e.preventDefault();
@@ -50,7 +49,7 @@ const Post = () => {
         post_like: 0,
         post_time: time,
       };
-      console.log(postData);
+
       fetch('https://bitit-server.vercel.app/posts', {
         method: 'POST',
         headers: {
@@ -90,7 +89,7 @@ const Post = () => {
               post_comment: 0,
               post_time: time,
             };
-            console.log(postData);
+            
             fetch('https://bitit-server.vercel.app/posts', {
               method: 'POST',
               headers: {
