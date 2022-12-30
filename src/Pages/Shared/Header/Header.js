@@ -4,12 +4,13 @@ import { AiFillHome, AiFillMessage, AiFillPicture } from 'react-icons/ai';
 import {HiUserCircle} from 'react-icons/hi';
 import './Header.css';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
+import Logo from '../../../image/logo.png';
 
 
 const Header = () => {
   const {user, logOut} = useContext(AuthContext);
   return (
-    <div className='sticky top-0'>
+    <div className='sticky top-0 z-[9999]'>
       <div className="navbar bg-base-100 p-0 min-h-[50px] w-full border-b border-zinc-800">
         <div className="navbar-start">
           <div className="dropdown">
@@ -22,7 +23,9 @@ const Header = () => {
               <li><NavLink to='/message' className='h-[35px] rounded-full mx-1'><AiFillMessage />Message</NavLink></li>
             </ul>
           </div>
-          <Link to='/' className="btn btn-ghost normal-case text-xl ml-0 lg:ml-3">Bitit</Link>
+          <Link to='/' className="btn btn-ghost normal-case text-xl ml-0 lg:ml-3">
+            <img src={Logo} alt="" className='w-8 mr-2'/>
+            Bitit</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">

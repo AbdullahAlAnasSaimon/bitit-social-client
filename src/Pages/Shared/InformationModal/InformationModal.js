@@ -4,9 +4,11 @@ import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const InformationModal = ({setModalStatus}) => {
-  const { updateUserInfo, updateUserEmail } = useContext(AuthContext);
+  const { user, updateUserInfo, updateUserEmail } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const [processing, setprocessing] = useState(false);
+
+  let storeUserEmail = JSON.stringify(user?.email);
 
   const handleUserInfoEdit = (data) => {
     setprocessing(true);
@@ -17,6 +19,19 @@ const InformationModal = ({setModalStatus}) => {
         setprocessing(false);
         setModalStatus(false);
       })
+
+
+    fetch(`http://localhost:5000/users?email=${storeUserEmail}`, {
+      method: 'PUT',
+      headers: {
+        'content-type': 'application/json'
+      },
+      body: JSON.stringify(data)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data);
+    })
 
     updateUserEmail(data?.email)
       .then(() => {
