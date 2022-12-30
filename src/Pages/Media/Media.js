@@ -5,7 +5,7 @@ import SinglePost from './SinglePost/SinglePost';
 
 const Media = () => {
   const [toggle, setToggle] = useState(false);
-  const { data: posts, isLoading } = useQuery({
+  const { data: posts, isLoading, refetch } = useQuery({
     queryKey: ['userPost'],
     queryFn: async () => {
       const res = await fetch('https://bitit-server.vercel.app/posts');
@@ -30,7 +30,7 @@ const Media = () => {
     return <Loading />
   }
 
-
+  refetch();
 
   return (
     <div className='grid grid-cols-1 lg:grid-cols-4'>
@@ -43,6 +43,7 @@ const Media = () => {
             handleToggleComment={handleToggleComment}
             toggle={toggle}
             setToggle={setToggle}
+            refetch={refetch}
           ></SinglePost>)
         }
         

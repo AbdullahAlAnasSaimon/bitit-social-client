@@ -8,28 +8,49 @@ import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import { Link } from 'react-router-dom';
 import Comment from '../Comment/Comment';
 
-const SinglePost = ({ post, handleToggleComment, toggle, setToggle }) => {
+const SinglePost = ({ post, handleToggleComment, toggle, setToggle, refetch }) => {
   const { user } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const [liked, setLiked] = useState(false);
 
   const [processing, setProcessing] = useState(false);
-  let likeReactCount = 0;
-
-  const { post_photo, post_text, post_time, user_name, user_photo } = post;
+  const { post_photo, post_text, post_time, user_name, user_photo, post_like } = post;
+  
+  let likeReactCount = post_like;
 
 
   const handleLikeReact = () => {
     if (!liked) {
       setLiked(true);
       likeReactCount += 1;
-      console.log(likeReactCount);
+      fetch(`http://localhost:5000/post-like/${post?._id}`,{
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({likeReactCount})
+      })
+      .then(res => res.json())
+      .then(data =>{
+        console.log(data);
+      })
     }
     else {
       const confirmRemoveLike = window.confirm('Are you sure to remove the like');
       if (confirmRemoveLike) {
         setLiked(false);
-        console.log(likeReactCount);
+        likeReactCount -= 1;
+        fetch(`http://localhost:5000/post-like/${post?._id}`,{
+        method: 'PUT',
+        headers: {
+          'content-type': 'application/json'
+        },
+        body: JSON.stringify({likeReactCount})
+      })
+      .then(res => res.json())
+      .then(data =>{
+        console.log(data);
+      })
       }
     }
 
@@ -62,12 +83,14 @@ const SinglePost = ({ post, handleToggleComment, toggle, setToggle }) => {
       .catch(err => { toast.error(err.message); setProcessing(false) })
   }
 
+  refetch();
+
   return (
     <div className='w-10/12 mx-auto border border-zinc-800 my-5 rounded-lg bg-zinc-900'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center m-3'>
           <div className='h-10 w-10'>
-            <img src={user_photo} alt="" className='rounded-full' />
+            <img src={user_photo} alt="" className='rounded-full h-10 w-10' />
           </div>
           <div className='ml-2'>
             <p className='text-sm font-semibold'>{user_name}</p>
@@ -81,6 +104,9 @@ const SinglePost = ({ post, handleToggleComment, toggle, setToggle }) => {
       <div>
         <p className='m-3'>{post_text}</p>
         {post_photo && <img src={post_photo} alt="" className='w-full' />}
+      </div>
+      <div className='border-t border-zinc-800'>
+        {post_like && <p className='text-sm'><AiFillLike className='inline-block'/> {post_like}</p>}
       </div>
       <div className='flex justify-around border-t border-zinc-800'>
         <button onClick={handleLikeReact} className={`bg-gray-300/30 ${liked && 'bg-blue-300/30 hover:bg-blue-300/40'} hover:bg-gray-300/40 w-full mx-5 my-5 py-1 rounded-lg duration-300`}>{liked ? <AiFillLike className='text-center w-full text-2xl text-blue-500' /> : <AiOutlineLike className='text-center w-full text-2xl' />}</button>
