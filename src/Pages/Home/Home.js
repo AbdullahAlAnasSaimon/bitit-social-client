@@ -5,12 +5,10 @@ import RightSideNav from "./RightSideNav/RightSideNav";
 
 const Home = () => {
   return (
-    <div className='grid grid-cols-4 mt-5'>
+    <div className='grid grid-cols-1 md:grid-cols-4 mt-5'>
       <LeftSideNav></LeftSideNav>
       <Post></Post>
-      <div className="">
       <RightSideNav></RightSideNav>
-      </div>
     </div>
   );
 };

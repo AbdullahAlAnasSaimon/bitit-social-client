@@ -43,7 +43,7 @@ const RightSideNav = () => {
   }
 
   return (
-    <div className='w-11/12 border border-zinc-700 p-3 rounded-lg'>
+    <div className='w-11/12 border border-zinc-700 p-3 rounded-lg hidden lg:block'>
       <h2 className='text-xl font-bold mb-5 text-white'>New to Bitit?</h2>
       <button onClick={handleGoogleSignIn} className='bg-white hover:bg-gray-200 text-zinc-700 w-full font-semibold text-sm h-[40px] rounded-full mb-3 duration-300' type="submit">Continue With Google</button>
       <Link to='/signup'><button className='bg-white hover:bg-gray-200 text-zinc-700 w-full font-semibold text-sm h-[40px] rounded-full duration-300' type="submit">Sign Up with Email And Password</button></Link>

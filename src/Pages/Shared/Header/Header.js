@@ -22,7 +22,7 @@ const Header = () => {
               <li><NavLink to='/message' className='h-[35px] rounded-full mx-1'><AiFillMessage />Message</NavLink></li>
             </ul>
           </div>
-          <Link className="btn btn-ghost normal-case text-xl">Bitit</Link>
+          <Link to='/' className="btn btn-ghost normal-case text-xl">Bitit</Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">

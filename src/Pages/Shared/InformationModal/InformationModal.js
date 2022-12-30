@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 
 const InformationModal = ({setModalStatus}) => {
-  const { user, setUser, updateUserInfo, updateUserEmail } = useContext(AuthContext);
+  const { updateUserInfo, updateUserEmail } = useContext(AuthContext);
   const { register, handleSubmit } = useForm();
   const [processing, setprocessing] = useState(false);
 

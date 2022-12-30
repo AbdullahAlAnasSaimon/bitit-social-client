@@ -99,7 +99,7 @@ const Post = () => {
   }
 
   return (
-    <div className='p-5 col-span-2 bg-[#2b2b2b] rounded-lg w-10/12 mx-auto'>
+    <div className='p-5 lg:col-span-2 bg-[#2b2b2b] rounded-lg w-10/12 mx-auto'>
       {
         user ? <>
           <form onSubmit={handleSubmit(handlePostSubmit)}>
