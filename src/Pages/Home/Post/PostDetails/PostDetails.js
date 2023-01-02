@@ -7,8 +7,8 @@ const PostDetails = () => {
   const {post_photo, post_text, post_time, user_name, user_photo, post_like, post_comment} = postDetails;
   return (
     <div className='grid grid-cols-1 lg:grid-cols-3'>
-      <div className='lg:w-7/12 mx-auto col-span-2'>
-        <img src={post_photo} alt="" className='max-h-[calc(100vh-52px)] min-h-[calc(100vh-52px)]'/>
+      <div className='mx-auto col-span-2'>
+        <img src={post_photo} alt="" className='lg:max-h-[calc(100vh-52px)] lg:min-h-[calc(100vh-52px)] lg:object-cover'/>
       </div>
       <div className='bg-zinc-900 p-4'>
         <div className='flex'>

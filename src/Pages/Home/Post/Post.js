@@ -89,7 +89,7 @@ const Post = () => {
               post_comment: 0,
               post_time: time,
             };
-            
+
             fetch('https://bitit-server.vercel.app/posts', {
               method: 'POST',
               headers: {
@@ -113,7 +113,7 @@ const Post = () => {
 
   return (
     <div className="lg:col-span-2">
-      <div className='p-5 bg-[#2b2b2b] rounded-lg w-10/12 mx-auto'>
+      <div className='p-5 bg-[#2b2b2b] rounded-none md:rounded-lg w-full md:w-10/12 mx-auto'>
         {
           user ? <>
             <form onSubmit={handleSubmit(handlePostSubmit)}>

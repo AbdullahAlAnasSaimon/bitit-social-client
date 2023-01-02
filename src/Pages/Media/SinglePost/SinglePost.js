@@ -107,7 +107,7 @@ const SinglePost = ({ post, refetch }) => {
   refetch();
 
   return (
-    <div className='w-10/12 mx-auto border border-zinc-800 my-5 rounded-lg bg-zinc-900'>
+    <div className='w-full md:w-10/12 mx-auto border border-zinc-800 my-5 rounded-none md:rounded-lg bg-zinc-900'>
       <div className='flex items-center justify-between'>
         <div className='flex items-center m-3'>
           <div className='h-10 w-10'>
@@ -146,7 +146,8 @@ const SinglePost = ({ post, refetch }) => {
           ></Comment>)
         }
       </div>
-      <div className={`${toggle ? 'visible' : 'hidden'} py-2`}>
+      {
+        user && <div className={`${toggle ? 'visible' : 'hidden'} py-2`}>
         <form onSubmit={handleSubmit(handlePostComment)} className="flex items-center m-2">
           <img src={user?.photoURL} alt="" className='rounded-full w-8 h-8 mr-2' />
           <input {...register("comment", { minLength: { value: 1 }, required: true })} name="comment" type="text" placeholder="Write your opinion" className="input input-bordered border border-zinc-700 focus:outline-none focus:border focus:border-blue-500 bg-zinc-800 w-full rounded-full h-[35px] text-[13px]" />
@@ -164,6 +165,7 @@ const SinglePost = ({ post, refetch }) => {
           </> : <RiSendPlaneFill className='mx-auto' />} </button>
         </form>
       </div>
+      }
 
       
 
