@@ -164,11 +164,17 @@ function DragDrop({ file, setFile }) {
 
   const handleChange = (file) => {
     setFile(file);
+    let image = document.getElementById('output');
+    image.src = URL.createObjectURL(file);
   };
+
   return (
     <div>
       <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
       <p className="text-center text-[12px]">{file ? `File name: ${file?.name}` : "no files uploaded yet"}</p>
+      <div className={`${file && 'h-[200px] overflow-y-scroll'}`}>
+        <img src="" id="output" alt="" className="w-auto mt-5 mx-auto" />
+      </div>
     </div>
   );
 }
