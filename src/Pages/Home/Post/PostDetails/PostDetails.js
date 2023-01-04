@@ -6,7 +6,9 @@ const PostDetails = () => {
   const postDetails = useLoaderData();
   const {post_photo, post_text, post_time, user_name, user_photo, post_like, post_comment} = postDetails;
   return (
-    <div className='grid grid-cols-1 lg:grid-cols-3'>
+    <div className='relative'>
+      <button className='absolute top-2 left-2 bg-zinc-300/50 font-semibold backdrop-blur text-zinc-800 px-2 py-1 text-sm rounded-full' onClick={() => window.history.back()}>Go Back</button>
+      <div className='grid grid-cols-1 lg:grid-cols-3'>
       <div className='mx-auto col-span-2'>
         <img src={post_photo} alt="" className='lg:max-h-[calc(100vh-52px)] lg:min-h-[calc(100vh-52px)] lg:object-cover'/>
       </div>
@@ -28,6 +30,7 @@ const PostDetails = () => {
           {post_comment > 0 && <p>{post_comment} comments</p>}
         </div>
       </div>
+    </div>
     </div>
   );
 };

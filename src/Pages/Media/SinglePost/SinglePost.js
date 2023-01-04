@@ -118,18 +118,13 @@ const SinglePost = ({ post, refetch }) => {
             <p className='text-xs'>{post_time.slice(0, 21)}</p>
           </div>
         </div>
-        {
-          post_photo && <div className='mr-4'>
-            <Link to={`/post/${post?._id}`} className='text-sm bg-zinc-800 hover:bg-zinc-900 duration-300 border border-blue-400 hover:border-blue-500 px-3 py-1 rounded-full'>Details</Link>
-          </div>
-        }
       </div>
       <div>
         <p className='m-3'>{post_text}</p>
         <div>
-          <figure>
+          <Link to={`/post/${post?._id}`}><figure>
             {post_photo && <img src={post_photo} alt="" className='w-full' />}
-          </figure>
+          </figure></Link>
         </div>
       </div>
       <div className='flex justify-between my-2'>
