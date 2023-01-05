@@ -32,7 +32,9 @@ const SinglePost = ({ post, refetch }) => {
         body: JSON.stringify({ likeReactCount })
       })
         .then(res => res.json())
-        .then(() => { })
+        .then(() => {
+          refetch();
+        })
     }
     else {
       const confirmRemoveLike = window.confirm('Are you sure to remove the like');
@@ -47,7 +49,9 @@ const SinglePost = ({ post, refetch }) => {
           body: JSON.stringify({ likeReactCount })
         })
           .then(res => res.json())
-          .then(() => { })
+          .then(() => {
+            refetch();
+          })
       }
     }
 
@@ -86,6 +90,7 @@ const SinglePost = ({ post, refetch }) => {
       .then(data => {
         if (data.acknowledged) {
           setProcessing(false);
+          refetch();
           toast.success('Commented successfully');
         }
       })
@@ -101,10 +106,11 @@ const SinglePost = ({ post, refetch }) => {
       .then(res => res.json())
       .then(data => {
         setPostComments(data);
+        refetch();
       })
   }
 
-  refetch();
+  
 
   return (
     <div className='w-full md:w-10/12 mx-auto border border-zinc-800 my-5 rounded-none md:rounded-lg bg-zinc-900'>
@@ -127,12 +133,14 @@ const SinglePost = ({ post, refetch }) => {
           </figure></Link>
         </div>
       </div>
-      <div className='flex justify-between my-2'>
+      {
+        (post_like > 0 || post_comment > 0) && <div className='flex justify-between my-2'>
         {post_like > 0 && <div className='flex items-center mx-3'><AiFillLike className='inline-block text-sm bg-blue-600 rounded-full p-[2px] mr-[2px]' /><p className='text-sm'> {post_like}</p></div>}
         {post_comment > 0 && <button onClick={() => handleShowComments(post?._id)} className='text-sm text-blue-500 hover:underline mr-3'>{post_comment} Comment</button>}
       </div>
+      }
       <div className='flex justify-around border-t border-zinc-800'>
-        <button onClick={handleLikeReact} className={`bg-zinc-800 ${liked && 'bg-blue-300/30 hover:bg-blue-300/40'} hover:bg-zinc-700 w-full mx-5 my-5 py-2 rounded-full duration-300`}>{liked ? <AiFillLike className='text-center w-full text-2xl text-blue-500' /> : <AiOutlineLike className='text-center w-full text-2xl' />}</button>
+        <button onClick={handleLikeReact} className={`bg-zinc-800 ${liked && 'bg-blue-300/30 hover:bg-blue-300/40'} w-full mx-5 my-5 py-2 rounded-full duration-300`}>{liked ? <AiFillLike className='text-center w-full text-2xl text-blue-500' /> : <AiOutlineLike className='text-center w-full text-2xl' />}</button>
         {/* <AiFillLike/> */}
         <button onClick={handleToggleComment} className='bg-zinc-800 hover:bg-zinc-700 w-full mx-5 my-5 py-1 rounded-full duration-300'><FaCommentAlt className='text-center w-full' /></button>
       </div>
