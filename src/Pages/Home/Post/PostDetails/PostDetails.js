@@ -7,7 +7,7 @@ const PostDetails = () => {
   const {post_photo, post_text, post_time, user_name, user_photo, post_like, post_comment} = postDetails;
   return (
     <div className='relative'>
-      <button className='absolute top-2 left-2 bg-zinc-300/50 font-semibold backdrop-blur text-zinc-800 px-2 py-1 text-sm rounded-full' onClick={() => window.history.back()}>Go Back</button>
+      <button className='absolute top-2 left-2 bg-gray-100 hover:bg-gray-200 duration-300 font-semibold backdrop-blur text-zinc-600 text-[20px] px-[11px] py-1 rounded-full' onClick={() => window.history.back()}>✕</button>
       <div className='grid grid-cols-1 lg:grid-cols-3'>
       <div className='mx-auto col-span-2'>
         <img src={post_photo} alt="" className='lg:max-h-[calc(100vh-52px)] lg:min-h-[calc(100vh-52px)] lg:object-cover'/>
@@ -26,7 +26,7 @@ const PostDetails = () => {
           <p className='text-sm mt-3'>{post_text}</p>
         </div>
         <div className='flex justify-between text-sm'>
-          {post_like && <p><AiFillLike className='inline-block text-sm bg-blue-600 rounded-full p-[2px] mr-[2px]' />{post_like}</p>}
+          {post_like > 0 && <p><AiFillLike className='inline-block text-sm bg-blue-600 rounded-full p-[2px] mr-[2px]' />{post_like}</p>}
           {post_comment > 0 && <p>{post_comment} comments</p>}
         </div>
       </div>
