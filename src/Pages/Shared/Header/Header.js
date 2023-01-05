@@ -1,14 +1,15 @@
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AiFillHome, AiFillMessage, AiFillPicture } from 'react-icons/ai';
-import {HiUserCircle} from 'react-icons/hi';
+import { HiUserCircle } from 'react-icons/hi';
+import {FiSearch} from 'react-icons/fi';
 import './Header.css';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import Logo from '../../../image/logo.png';
 
 
 const Header = () => {
-  const {user, logOut} = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   return (
     <div className='sticky top-0 z-[9999]'>
       <div className="navbar bg-base-100 p-0 min-h-[50px] w-full border-b border-zinc-800">
@@ -24,7 +25,11 @@ const Header = () => {
             </ul>
           </div>
           <Link to='/' className="btn btn-ghost normal-case text-xl ml-0 lg:ml-3">
-            <img src={Logo} alt="" className='w-8'/></Link>
+            <img src={Logo} alt="" className='w-8' /></Link>
+          <div className='relative'>
+            <input type="text" placeholder='Search' className='py-2 pl-4 pr-11 rounded-full md:w-auto text-sm focus:outline-none' />
+            <button className='absolute -right-0 text-lg bg-transparent hover:bg-white/10 rounded-full w-[36px] h-[36px] duration-300'><FiSearch className='inline-block -mt-[2px]'/></button>
+          </div>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">
@@ -35,19 +40,19 @@ const Header = () => {
         </div>
         <div className="navbar-end">
           {
-            user ? 
-            <div className="dropdown dropdown-end">
-              <button tabIndex={0} className="btn btn-ghost btn-circle avatar">
-                <div className="w-10 rounded-full">
-                  {user?.photoURL ? <img src={user?.photoURL} alt='User' /> : <HiUserCircle className='text-[40px]'/>}
-                </div>
-              </button>
-              <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-[999]">
-                <li><NavLink to='/aboutme'>About</NavLink></li>
-                <li><button onClick={() => logOut()}>Log Out</button></li>
-              </ul>
-            </div> 
-            : <Link to='/login' className='bg-blue-500 hover:bg-blue-600 duration-300 px-3 py-1 text-zinc-800 rounded-full mr-0 lg:mr-3'>Log In</Link>
+            user ?
+              <div className="dropdown dropdown-end">
+                <button tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                  <div className="w-10 rounded-full">
+                    {user?.photoURL ? <img src={user?.photoURL} alt='User' /> : <HiUserCircle className='text-[40px]' />}
+                  </div>
+                </button>
+                <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52 z-[999]">
+                  <li><NavLink to='/aboutme'>About</NavLink></li>
+                  <li><button onClick={() => logOut()}>Log Out</button></li>
+                </ul>
+              </div>
+              : <Link to='/login' className='bg-blue-500 hover:bg-blue-600 duration-300 px-3 py-1 text-zinc-800 rounded-full mr-0 lg:mr-3'>Log In</Link>
           }
         </div>
       </div>
