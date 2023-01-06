@@ -26,8 +26,8 @@ const Header = () => {
           </div>
           <Link to='/' className="btn btn-ghost normal-case text-xl ml-0 lg:ml-3">
             <img src={Logo} alt="" className='w-8' /></Link>
-          <div className='relative'>
-            <input type="text" placeholder='Search' className='py-2 pl-4 pr-11 rounded-full md:w-auto text-sm focus:outline-none' />
+          <div className='relative w-auto'>
+            <input type="text" placeholder='Search' className='py-2 pl-4 md:pr-11 rounded-full w-auto text-sm focus:outline-none' />
             <button className='absolute -right-0 text-lg bg-transparent hover:bg-white/10 rounded-full w-[36px] h-[36px] duration-300'><FiSearch className='inline-block -mt-[2px]'/></button>
           </div>
         </div>
