@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AiFillHome, AiFillMessage, AiFillPicture } from 'react-icons/ai';
+import {FaUsers} from 'react-icons/fa';
 import { HiUserCircle } from 'react-icons/hi';
 import {FiSearch} from 'react-icons/fi';
 import './Header.css';
@@ -20,6 +21,7 @@ const Header = () => {
             </button>
             <ul tabIndex={0} className="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
               <li><NavLink to='/' className='h-[35px] rounded-full mx-1'><AiFillHome />Home</NavLink></li>
+              <li><NavLink to='/friends' className='h-[35px] rounded-full mx-1'><FaUsers />Friends</NavLink></li>
               <li><NavLink to='/media' className='h-[35px] rounded-full mx-1'><AiFillPicture />Media</NavLink></li>
               <li><NavLink to='/message' className='h-[35px] rounded-full mx-1'><AiFillMessage />Message</NavLink></li>
             </ul>
@@ -34,6 +36,7 @@ const Header = () => {
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal p-0">
             <div className="tooltip tooltip-bottom h-[40px] my-auto" data-tip="Home"><li><NavLink to='/' className={({ isActive }) => isActive ? 'active rounded-full mx-3 px-10 h-[40px] my-auto active:bg-[#0066ff] text-2xl' : 'undefined rounded-full mx-3 px-10 h-[40px] my-auto active:bg-[#0066ff] text-2xl'}><AiFillHome /></NavLink></li></div>
+            <div className="tooltip tooltip-bottom h-[40px] my-auto" data-tip="Friends"><li><NavLink to='/friends' className='undefined rounded-full mx-5 px-10 h-[40px] my-auto active:bg-[#0066ff] text-2xl'><FaUsers /></NavLink></li></div>
             <div className="tooltip tooltip-bottom h-[40px] my-auto" data-tip="Media"><li><NavLink to='/media' className='undefined rounded-full mx-5 px-10 h-[40px] my-auto active:bg-[#0066ff] text-2xl'><AiFillPicture /></NavLink></li></div>
             <div className="tooltip tooltip-bottom h-[40px] my-auto" data-tip="Message"><li><NavLink to='/message' className='undefined rounded-full mx-5 px-10 h-[40px] my-auto active:bg-[#0066ff] text-2xl'><AiFillMessage /></NavLink></li></div>
           </ul>
