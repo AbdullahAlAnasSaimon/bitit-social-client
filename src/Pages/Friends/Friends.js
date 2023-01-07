@@ -1,10 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import Loading from '../Shared/Loading/Loading';
 import SingleFriend from './SingleFriend/SingleFriend';
 
 const Friends = () => {
 
-  const { data: friends, isLoading, refetch } = useQuery({
+  const { data: friends, isLoading } = useQuery({
     queryKey: ['allFriends'],
     queryFn: async () => {
       const res = await fetch('http://localhost:5000/friends');
@@ -13,7 +14,9 @@ const Friends = () => {
     }
   })
 
-  console.log(friends);
+  if(isLoading){
+    return <Loading/>
+  }
 
   return (
     <div className='grid grid-cols-1 lg:grid-cols-4'>

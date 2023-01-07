@@ -8,7 +8,6 @@ import { HiUserCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 import SinglePost from "../../Media/SinglePost/SinglePost";
-import Loading from "../../Shared/Loading/Loading";
 import './Post.module.css';
 
 const Post = () => {
