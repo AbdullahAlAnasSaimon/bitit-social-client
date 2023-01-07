@@ -11,6 +11,11 @@ import Logo from '../../../image/logo.png';
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
+
+  const handleSearch = () =>{
+    console.log()
+  }
+
   return (
     <div className='sticky top-0 z-[9999]'>
       <div className="navbar bg-base-100 p-0 min-h-[50px] w-full border-b border-zinc-800">
@@ -30,7 +35,7 @@ const Header = () => {
             <img src={Logo} alt="" className='w-8' /></Link>
           <div className='relative w-auto'>
             <input type="text" placeholder='Search' className='py-2 pl-4 pr-11 rounded-full w-[180px] md:w-auto text-sm focus:outline-none' />
-            <button className='absolute -right-0 text-lg bg-transparent hover:bg-white/10 rounded-full w-[36px] h-[36px] duration-300'><FiSearch className='inline-block -mt-[2px]'/></button>
+            <button onClick={handleSearch} className='absolute -right-0 text-lg bg-transparent hover:bg-white/10 rounded-full w-[36px] h-[36px] duration-300'><FiSearch className='inline-block -mt-[2px]'/></button>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">

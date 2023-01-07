@@ -8,6 +8,7 @@ import { HiUserCircle } from "react-icons/hi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../Context/AuthProvider/AuthProvider";
 import SinglePost from "../../Media/SinglePost/SinglePost";
+import Loading from "../../Shared/Loading/Loading";
 import './Post.module.css';
 
 const Post = () => {
@@ -18,7 +19,7 @@ const Post = () => {
   const { register, formState: { errors }, handleSubmit } = useForm();
   const imgHostKey = process.env.REACT_APP_IMGBB_KEY;
 
-  const { data: loadPosts, isLoading, refetch } = useQuery({
+  const { data: loadPosts, refetch } = useQuery({
     queryKey: ['posts'],
     queryFn: async () => {
       const res = await fetch('https://bitit-server.vercel.app/limited-posts');
@@ -26,7 +27,6 @@ const Post = () => {
       return data;
     }
   })
-
 
   const handleDragAndDropArea = (e) => {
     e.preventDefault();
