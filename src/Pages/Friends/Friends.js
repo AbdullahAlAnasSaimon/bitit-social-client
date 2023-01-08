@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useContext } from 'react';
+import { AuthContext } from '../../Context/AuthProvider/AuthProvider';
 import Loading from '../Shared/Loading/Loading';
 import SingleFriend from './SingleFriend/SingleFriend';
 
 const Friends = () => {
+  const {user} = useContext(AuthContext);
 
   const { data: friends, isLoading } = useQuery({
     queryKey: ['allFriends'],
@@ -18,6 +20,12 @@ const Friends = () => {
     return <Loading/>
   }
 
+  if(!user){
+    return;
+  }
+
+  const filterdFriends = friends.filter(friend => user?.email !== friend?.email);
+
   return (
     <div className='grid grid-cols-1 lg:grid-cols-4'>
       <div></div>
@@ -25,7 +33,7 @@ const Friends = () => {
         <h2>People You May Know</h2>
         <div>
           {
-            friends?.map(friend => <SingleFriend
+            filterdFriends?.map(friend => <SingleFriend
               key={friend?._id}
             friend={friend}
             ></SingleFriend>)
