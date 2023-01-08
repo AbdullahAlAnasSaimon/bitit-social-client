@@ -1,18 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { AiFillHome, AiFillMessage, AiFillPicture } from 'react-icons/ai';
-import {FaUsers} from 'react-icons/fa';
+import { FaUsers } from 'react-icons/fa';
 import { HiUserCircle } from 'react-icons/hi';
-import {FiSearch} from 'react-icons/fi';
+import { FiSearch } from 'react-icons/fi';
 import './Header.css';
 import { AuthContext } from '../../../Context/AuthProvider/AuthProvider';
 import Logo from '../../../image/logo.png';
+import { BsArrowLeftShort } from 'react-icons/bs';
 
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [showSearch, setShowSearch] = useState(false);
 
-  const handleSearch = () =>{
+  const handleShowSearch = () => {
+    setShowSearch(true);
+  }
+  const handleHideSearch = () => {
+    setShowSearch(false);
+  }
+
+  const handleSearch = () => {
     console.log()
   }
 
@@ -31,11 +40,16 @@ const Header = () => {
               <li><NavLink to='/message' className='h-[35px] rounded-full mx-1'><AiFillMessage />Message</NavLink></li>
             </ul>
           </div>
-          <Link to='/' className="btn btn-ghost normal-case text-xl ml-0 lg:ml-3">
-            <img src={Logo} alt="" className='w-8' /></Link>
+          {!showSearch && <Link to='/' className="btn btn-ghost normal-case text-xl ml-0 lg:ml-3"><img src={Logo} alt="" className='w-8' /></Link>}
           <div className='relative w-auto'>
-            <input type="text" placeholder='Search' className='py-2 pl-4 pr-11 rounded-full w-[180px] md:w-auto text-sm focus:outline-none' />
-            <button onClick={handleSearch} className='absolute -right-0 text-lg bg-transparent hover:bg-white/10 rounded-full w-[36px] h-[36px] duration-300'><FiSearch className='inline-block -mt-[2px]'/></button>
+            {showSearch && <>
+              <div className="flex">
+                <button onClick={handleHideSearch} className={`bg-white/30 hover:bg-white/40 duration-300 w-[36px] h-[36px] rounded-full mx-3`}><BsArrowLeftShort className='inline-block text-2xl' /></button>
+                <input type="text" placeholder='Search' className='py-2 pl-4 pr-11 rounded-full w-[180px] md:w-auto text-sm focus:outline-none' />
+              <button onClick={handleSearch} className='absolute -right-0 text-lg bg-transparent hover:bg-white/10 rounded-full w-[36px] h-[36px] duration-300'><FiSearch className='inline-block -mt-[2px]' /></button>
+              </div>
+            </>}
+            <button onClick={handleShowSearch} className={`bg-white/30 hover:bg-white/40 duration-300 w-[36px] h-[36px] rounded-full ${showSearch ? 'hidden' : 'block'}`}><FiSearch className='inline-block text-xl' /></button>
           </div>
         </div>
         <div className="navbar-center hidden lg:flex">
