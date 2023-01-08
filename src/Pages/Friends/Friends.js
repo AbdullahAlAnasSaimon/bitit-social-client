@@ -30,7 +30,7 @@ const Friends = () => {
     <div className='grid grid-cols-1 lg:grid-cols-4'>
       <div></div>
       <div className='col-span-2'>
-        <h2>People You May Know</h2>
+        <h2 className='w-full md:w-10/12 md:mx-auto text-center md:text-left my-5 font-semibold'>People You May Know</h2>
         <div>
           {
             filterdFriends?.map(friend => <SingleFriend
